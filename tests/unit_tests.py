@@ -1,8 +1,12 @@
 import unittest
-from Block import Block
-from AES import AES
-from Key import Key
 from random import randbytes
+import sys
+
+sys.path.append("../src")
+
+from AES import *
+from Block import *
+from Key import *
 
 class TestAESMethods(unittest.TestCase):
 
@@ -184,3 +188,6 @@ class TestAESMethods(unittest.TestCase):
         self.assertNotEqual(InitSeq, EncryptedSeq)
 
         self.assertEqual(InitSeq, DecryptedSeq)
+
+if __name__ == "__main__" :
+    unittest.main()
