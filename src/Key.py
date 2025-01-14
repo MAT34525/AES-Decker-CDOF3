@@ -63,7 +63,7 @@ class Key :
 
     def RotWord(array : list) -> list:
         """
-        Apply a signle rotation to the left on an array 
+        Apply a single rotation to the left on an array 
         'array' - Integer array to be rotated
         return : Integer array after the rotation
         """
@@ -89,7 +89,7 @@ class Key :
         """
         Compute the rcon value from a specific power : {02}^(pow - 1) {00} {00} {00}
         'pow' - Integer for the power raise
-        return : Integer array containign the rcon value
+        return : Integer array containing the rcon value
         """
 
         initVal = 2
@@ -157,7 +157,7 @@ class Key :
 
             temp = words[i-1]
             
-            # At the begining of each word, compute a word by using a rotation, substitution and a XOR with previous values
+            # At the beginning of each word, compute a word by using a rotation, substitution and a XOR with previous values
             if i %  self.Nk == 0:
 
                 temp = Key.XORarrays(Key.SubWord(Key.RotWord(temp)), Key.Rcon(rconCount))

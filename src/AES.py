@@ -212,7 +212,7 @@ class AES :
         # Get bytes sequence from blocks
         sequence = self.BlocksToSequence()
 
-        # Convert bytes sequence to a signle byte array
+        # Convert bytes sequence to a single byte array
         bytesSequence = bytes(list(sequence))
 
         # Write the bytesSequence to the file
