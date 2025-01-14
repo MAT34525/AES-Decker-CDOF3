@@ -1,9 +1,6 @@
-import argparse
-import sys, subprocess
-
-sys.path.append("../src")
-
 from AES import *
+import argparse
+import sys
 
 if __name__ == "__main__" :
 
@@ -12,8 +9,6 @@ if __name__ == "__main__" :
     parser = argparse.ArgumentParser(prog="AES")
 
     subParserMode =   parser.add_argument_group("MODE", "Choose one of the following modes")
-
-    subParserMode.add_argument('-T', help="Testing mode", action='store_true')
 
     subParserMode.add_argument('-E', help="Encryption mode", action='store_true')
     subParserMode .add_argument('-D', help="Decryption mode", action='store_true')
@@ -50,13 +45,6 @@ if __name__ == "__main__" :
 
         parse = parser.parse_args(args)
 
-    # Run test
-    if parse.T :
-
-        subprocess.run(["python", "../tests/test_unittest.py"])
-        sys.exit()
-
-
     # Select key 
     if (parse.kb != None and parse.kt != None) \
             or (parse.kr != None and parse.kt != None) \
@@ -67,7 +55,7 @@ if __name__ == "__main__" :
 
     if (parse.kb == None and parse.kt == None and parse.kr == None):
     
-        print("You should insert a key using : -kr or -kb or -kt")
+        print("You sould insert a key using : -kr or -kb or -kt")
         sys.exit(0)
 
     # Load the key value
