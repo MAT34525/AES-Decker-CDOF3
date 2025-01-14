@@ -173,7 +173,7 @@ class TestAESMethods(unittest.TestCase):
         cipher = AES()
 
         cipher.UseRandomKey(16)
-        cipher.FromFile("InFiles/test.jpg")
+        cipher.FromFile("input/test.jpg")
 
         InitSeq = cipher.BlocksToSequence() 
 
