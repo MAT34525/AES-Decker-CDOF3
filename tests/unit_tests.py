@@ -2,7 +2,7 @@ import unittest
 from random import randbytes
 import sys
 
-sys.path.append("../src")
+sys.path.append("src")
 
 from AES import *
 from Block import *
@@ -173,7 +173,7 @@ class TestAESMethods(unittest.TestCase):
         cipher = AES()
 
         cipher.UseRandomKey(16)
-        cipher.FromFile("InFiles/test.jpg")
+        cipher.FromFile("input/test.jpg")
 
         InitSeq = cipher.BlocksToSequence() 
 
