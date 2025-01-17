@@ -64,54 +64,54 @@ if __name__ == "__main__" :
         sys.exit(0)
 
     # Select key 
-    if (parse.key_bytes != None and parse.key_text != None) \
-            or (parse.key_random != None and parse.key_text != None) \
-            or (parse.key_random != None and parse.key_bytes != None) :
+    if (parse.key_bytes and parse.key_text) \
+            or (parse.key_random  and parse.key_text ) \
+            or (parse.key_random  and parse.key_bytes ) :
         
         print("You can't have multiple keys use : --key_random or --key_bytes or --key_text")
         sys.exit(0)
 
-    if (parse.key_bytes == None and parse.key_text == None and parse.key_random == None):
+    if (not(any([parse.key_bytes, parse.key_text, parse.key_random]))):
     
         print("You should insert a key using : --key_random or --key_bytes or --key_text")
         sys.exit(0)
 
     # Load the key value
-    if parse.key_random != None :
+    if parse.key_random  :
 
         AES_Instance.UseRandomKey(parse.key_random)
         
-    elif parse.key_bytes != None :
+    elif parse.key_bytes  :
 
         AES_Instance.UseBytesKey(parse.key_bytes)
     
-    elif parse.key_text != None :
+    elif parse.key_text  :
 
         AES_Instance.UseTextKey(parse.key_text)
 
     # Select data
-    if (parse.data_text != None and parse.data_random != None) \
-        or (parse.data_text != None and parse.data_file != None) \
-        or (parse.data_file != None and parse.data_random != None) :
+    if (parse.data_text  and parse.data_random ) \
+        or (parse.data_text  and parse.data_file ) \
+        or (parse.data_file  and parse.data_random ) :
     
         print("You can't have multiple data inputs use : --data_random or --data_text or --data_file")
         sys.exit(0)
 
-    if (parse.data_random == None and parse.data_text == None and parse.data_file == None):
+    if (not(any([parse.data_random, parse.data_text, parse.data_file]))):
     
         print("You should have a data input using : --data_random or --data_text or --data_file")
         sys.exit(0)
 
     # Load the data  
-    if parse.data_random != None :
+    if parse.data_random  :
 
         AES_Instance.FromRandomByte(parse.data_random)
 
-    elif parse.data_text != None :
+    elif parse.data_text  :
 
         AES_Instance.FromText(parse.data_text)
 
-    elif parse.data_file != None :
+    elif parse.data_file  :
 
         AES_Instance.FromFile(parse.data_file)
 
@@ -126,28 +126,28 @@ if __name__ == "__main__" :
         AES_Instance.UnCipher()
 
     # Select output 
-    if (parse.out_bytes != False and parse.out_text != False) \
-        or (parse.out_text != False and parse.out_file != None) \
-        or (parse.out_file != None and parse.out_bytes != False) :
+    if (parse.ob and parse.ot ) \
+        or (parse.ot and parse.out_file ) \
+        or (parse.out_file and parse.ob ) :
     
-        print("You can't have multiple data outputs use : --out_bytes or --out_text or --out_file")
+        print("You can't have multiple data outputs use : -ob or -ot or --out_file")
         sys.exit(0)
 
-    if (parse.out_bytes == False and parse.out_text == False and parse.out_file == None):
+    if (not(any([parse.ob, parse.ot, parse.out_file]))):
     
-        print("You should have a data output using : --out_bytes or --out_text or --out_file")
+        print("You should have a data output using : -ob or -ot or --out_file")
         sys.exit(0)
 
     # Run output
         
-    if parse.out_bytes :
+    if parse.ob :
 
         AES_Instance.ToBytes()
 
-    elif parse.out_text :
+    elif parse.ot :
 
         AES_Instance.ToText()
 
-    elif parse.out_file != None :
+    elif parse.out_file  :
 
         AES_Instance.ToFile(parse.out_file)
