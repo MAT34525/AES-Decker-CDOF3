@@ -1,2 +1,6 @@
-
+__pycache__
+build
+dist
+src/__pycache__
+src/AES-Decker-CDOF3
 *.pyc

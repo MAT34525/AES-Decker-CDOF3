@@ -1,5 +1,6 @@
 import argparse
-import sys, subprocess
+import sys
+import subprocess
 
 sys.path.append("src")
 
