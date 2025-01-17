@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 # On the base of those posts : https://stackoverflow.com/questions/26900328/install-dependencies-from-setup-py 
 
@@ -17,7 +17,7 @@ if os.path.isfile(requirement_path):
         install_requires = f.read().splitlines()
 
 setup(
- name='Todo-Decker-CDOF3',
+ name='AES-Decker-CDOF3',
  version='1.0',
  author='Mathys DECKER',
  license='MIT',

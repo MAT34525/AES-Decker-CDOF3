@@ -1,9 +1,7 @@
-import warnings
 from Block import Block
 from Key import Key
 from random import randbytes
 from tqdm import tqdm
-from threading import Thread
 
 class AES :
 
