@@ -20,19 +20,19 @@ If you want to clone the repository using git, you should also have it installed
 
 First of all, you will have to clone the repository (or download the zip file) from GitHub
 
-```powershell
+```bash
 git clone https://github.com/MAT34525/AES-Decker-CDOF3
 ```
 
 Once you downloaded the project, move to the project folder
 
-```powershell
+```bash
 cd AES-Decker-CDOF3
 ```
 
 Then install the dependencies and build the package using :
 
-```powershell
+```bash
 pip install .
 ```
 
@@ -40,13 +40,13 @@ pip install .
 
 To run simple tests, you should simply run the project using the  `-T` flag :
 
-```powershell
+```bash
 python main.py -T
 ```
 
 ## Usages
 
-```powershell
+```bash
 python main.py [commands] [options]
 ```
 
@@ -95,6 +95,21 @@ OUTPUT: Choose one of the following commands to output / save the result
     -of path, --out-file path
                           Output file to a path
 
+## Examples
+Here are some examples of the commands you can run 
+
+We can encrypt a string using a random key and output it as a file :
+
+```bash
+python main.py -E -kr 16 -dt "This is an example" -of encrypted.enc
+```
+
+We can decrypt a file using an input key, a file and output it as a byte array :
+
+```bash
+python main.py -D -kb "2a c3 73 6b 32 8d d1 6b a7 4f f5 c7 b9 48 90 85" -df encrypted.enc -ot
+```
+
 
 ## Built With
 
@@ -107,7 +122,7 @@ Please read [CONTRIBUTING.md](https://github.com/MAT34525/AES-Decker-CDOF3/blob/
 
 ## Authors
 
-* **Mathys Decker** - *Initial work* - [M4T34525](https://github.com/MAT34525)
+* **Mathys DECKER** - *Initial work* - [M4T34525](https://github.com/MAT34525)
 * **Jules Sylvain MUAMBA MVELE** - *Contributions* - [JulesSylMUAMBA](https://github.com/JulesSylMUAMBA)
 
 ## License
