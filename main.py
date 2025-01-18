@@ -21,7 +21,7 @@ if __name__ == "__main__" :
 
     # Algorithms ================================
     subParserAlgorithm = parser.add_argument_group("ALGORITHMS", "Choose one of the following algorithms")
-    subParserAlgorithmGroup = subParserAlgorithm.add_mutually_exclusive_group(required=True) 
+    subParserAlgorithmGroup = subParserAlgorithm.add_mutually_exclusive_group() 
     
     subParserAlgorithmGroup.add_argument('-ecb', help='Run the encryption/decryption using the ECB algorithm', action='store_true')
     subParserAlgorithmGroup.add_argument('-cbc', help='Run the encryption/decryption using the CBC algorithm', action='store_true')
