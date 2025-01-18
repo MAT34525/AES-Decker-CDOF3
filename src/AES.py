@@ -1,9 +1,7 @@
-import warnings
 from Block import Block
 from Key import Key
 from random import randbytes
 from tqdm import tqdm
-from threading import Thread
 
 class AES :
 
@@ -212,7 +210,7 @@ class AES :
         # Get bytes sequence from blocks
         sequence = self.BlocksToSequence()
 
-        # Convert bytes sequence to a signle byte array
+        # Convert bytes sequence to a single byte array
         bytesSequence = bytes(list(sequence))
 
         # Write the bytesSequence to the file
