@@ -68,7 +68,7 @@ class Block :
 
     def BlockToSequence(self) -> list :
             """
-            Convert the block back to an interger array
+            Convert the block back to an integer array
             return : Array containing the block data            
             """
 
@@ -84,7 +84,7 @@ class Block :
 
     def MultiplyBytes(byte1: int, byte2 : int) -> int:
         """
-        Get the resulting polinomial from a polinomial multiplication
+        Get the resulting polynomial from a polynomial multiplication
         'byte1' - First byte
         'byte2' - Second byte
         return : Result of the multiplication as an integer
@@ -117,7 +117,7 @@ class Block :
         Shift an array 'shift' times on the left (default) or right
         'array' - Array to be shifted
         'shift' - Integer specifying the amount of shift (looped if bigger than the array length)
-        'left' - Boolean idicating the direction of the Shift : True (default) : left, False : right        
+        'left' - Boolean indicating the direction of the Shift : True (default) : left, False : right        
         """
 
         shiftedArray = []
@@ -250,7 +250,7 @@ class Block :
         # We do a matrix multiplication of the rotating vector shifts and the columns values
         # Multiplications are polynomial multiplications, additions are simple XOR
         # The result of each new column cells values are cast into the filed GF(2^8) using 
-        # an irreductible polynomial x^8 + x^3 + + x^1 + 1 (default)
+        # an irreducible polynomial x^8 + x^3 + + x^1 + 1 (default)
 
         # c1'        Shift(IV, 2)         c1
         # c2'    =   Shift(IV, 3)    *    c2
