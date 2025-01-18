@@ -8,86 +8,49 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+To run the program, you should have python and pip installed :
 
-```
-Give examples
-```
+- Python : [Downloads](https://www.python.org/downloads/)
+
+If you want to clone the repository using git, you should also have it installed :
+
+- Git : [Downloads](https://git-scm.com/downloads)
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+First of all, you will have to clone the repository (or download the zip file) from GitHub
 
-Say what the step will be
-
-```
-Give the example
+```powershell
+git clone https://github.com/MAT34525/AES-Decker-CDOF3
 ```
 
-And repeat
+Once you downloaded the project, move to the project folder
 
-```
-until finished
+```powershell
+cd AES-Decker-CDOF3
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Then install the dependencies and build the package using :
+
+```powershell
+pip install .
+```
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+To run simple tests, you should simply run the project using the  `-T` flag :
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+```powershell
+python main.py -T
 ```
 
-### And coding style tests
+## Usages
 
-Explain what these tests test and why
-
-```
-Give an example
+```powershell
+python main.py [commands] [options]
 ```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Python](https://www.python.org/) - The interpreter used by the project
-* [Unittest](https://docs.python.org/3/library/unittest.html) - Unit testing
-## Contributing
-
-Please read [CONTRIBUTING.md](https://github.com/MAT34525/AES-Decker-CDOF3/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Authors
-
-* **Mathys Decker** - *Initial work* - [M4T34525](https://github.com/MAT34525)
-* **Jules Sylvain MUAMBA MVELE** - *Contributions* - [JulesSylMUAMBA](https://github.com/JulesSylMUAMBA)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
-
-
-***Cryptography_Project_AES***
-
-Author : Mathys Decker (Group 15)
-
-Simple AES implementation for a cryptography project
-
-usage: AES [-h] [-E] [-D] [-kr size] [-kb hex] [-kt text] [-dr size] [-dt text] [-df path]\
+ AES [-h] [-E] [-D] [-kr size] [-kb hex] [-kt text] [-dr size] [-dt text] [-df path]\
            [-ob] [-ot] [-of path]
 
 options:
@@ -120,10 +83,28 @@ OUTPUT:
   -ot         Output text\
   -of path    Output file to a path
 
-**Sources**
 
-https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf
+## Built With
 
-https://docs.python.org/3/library/argparse.html
+* [Python](https://www.python.org/) - The interpreter used by the project
+* [Unittest](https://docs.python.org/3/library/unittest.html) - Unit testing
 
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/MAT34525/AES-Decker-CDOF3/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Authors
+
+* **Mathys Decker** - *Initial work* - [M4T34525](https://github.com/MAT34525)
+* **Jules Sylvain MUAMBA MVELE** - *Contributions* - [JulesSylMUAMBA](https://github.com/JulesSylMUAMBA)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+Thanks to 
+- NIST for providing detailed explanation of the AES algorithm : [AES documentation](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf)
+- PurpleBooth for creating templates for documentation and contribution policies
 
