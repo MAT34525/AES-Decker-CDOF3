@@ -2,6 +2,11 @@ from Block import Block
 from Key import Key
 from random import randbytes
 from tqdm import tqdm
+from enum import Enum
+
+class Modes(Enum) :
+    ECB = 1
+    CBC = 2
 
 class AES :
 
@@ -12,6 +17,8 @@ class AES :
         
         self.blocks = None
         self.key = None
+        self.iv = None
+        self.mode : Modes = Modes.ECB # Default mode
 
     # Static methods & Other =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
             
@@ -54,6 +61,14 @@ class AES :
         print(" ".join([hex(x)[2:] if len(hex(x)) == 4 else "0" + hex(x)[2:]  for x in sequence]))
 
     # Instance methods =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    # <=-=-=-= Select the mode =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+    def SetECBMode(self) :
+        self.mode = Modes.ECB
+
+    def SetCBCMode(self) :
+        self.mode = Modes.CBC
 
     # <=-=-=-= Load the data =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -104,6 +119,40 @@ class AES :
         
         print("Input file has been loaded from :")
         print(path)
+
+    # <=-=-=-= Load the IV =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+    def UseRandomIV(self):
+        """
+        Generate a random sequence of 16 bytes  to be used as an IV
+        """
+
+        self.iv = randbytes(16)
+
+        print("Randomly generated iv :")
+        AES.PrintSequence(self.iv)
+
+    def UseBytesIV(self, iv : str):
+        """
+        Get the bytes to be used as an iv
+        'iv' - Integer array to be used as an iv
+        """
+        sequence = []
+
+        for elt in iv.split(" "):
+
+            sequence.append(int(elt, base = 16))
+
+        if len(sequence) != 16:
+
+            raise ValueError("The iv size is invalid and should be 16 bytes")
+        
+        print(len(sequence))
+        
+        self.iv = sequence
+
+        print("Input iv :")
+        AES.PrintSequence(sequence)
 
     # <=-=-=-= Load the key =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -248,7 +297,7 @@ class AES :
 
         return block
 
-    def Cipher(self):
+    def Cipher(self, mode : Modes):
         """
         Encrypt all blocks using the key        
         """
@@ -262,8 +311,20 @@ class AES :
         # Iteration with progress bar 
         for blockIndex in tqdm(range(nBlocks), desc= "Encrypt blocks...") :
 
-            # Encrypt a block
-            encryptedBlocks.append(self.CipherBlock(self.blocks[blockIndex], keySchedule))
+            if(mode == Modes.ECB) :
+
+                # Encrypt a block using ECB technique
+                encryptedBlocks.append(self.CipherBlock(self.blocks[blockIndex], keySchedule))
+
+            elif (mode == Modes.CBC) :
+
+                # Take the IV to xor the first block, for the first operation
+                previousBlock : Block = Block(self.iv) if blockIndex == 0 else self.blocks[blockIndex-1] 
+
+                # Encrypt a block using ECB technique
+                encryptedBlocks.append(self.CipherBlock(Block.XorBlocks(self.blocks[blockIndex], previousBlock), keySchedule))
+
+
 
         self.blocks = encryptedBlocks
 
@@ -291,7 +352,7 @@ class AES :
 
         return block
 
-    def UnCipher(self):
+    def UnCipher(self, mode : Modes):
         """
         Decrypt all blocks using the key
         """
@@ -305,7 +366,18 @@ class AES :
         # Iteration with progress bar
         for blockIndex in tqdm(range(nBlocks), desc= "Decrypt blocks...") :
 
-            # Decrypt a block
-            plainBlocks.append(self.UnCipherBlock(self.blocks[blockIndex], keySchedule))
+            if(mode == Modes.ECB) :
+                
+                # Decrypt a block
+                plainBlocks.append(self.UnCipherBlock(self.blocks[blockIndex], keySchedule))
+
+            elif (mode == Modes.CBC) :  
+
+                # Take the IV to xor the first block, for the first operation
+                previousBlock : Block = Block(self.iv) if blockIndex == 0 else self.blocks[blockIndex-1] 
+
+                # Decrypt a block using ECB technique
+                plainBlocks.append(self.UnCipherBlock(Block.XorBlocks(self.blocks[blockIndex], previousBlock), keySchedule)) 
+
 
         self.blocks = plainBlocks
