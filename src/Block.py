@@ -1,3 +1,5 @@
+import Block
+
 SBOX = [['63', '7c', '77', '7b', 'f2', '6b', '6f', 'c5', '30', '01', '67', '2b', 'fe', 'd7', 'ab', '76'], 
         ['ca', '82', 'c9', '7d', 'fa', '59', '47', 'f0', 'ad', 'd4', 'a2', 'af', '9c', 'a4', '72', 'c0'], 
         ['b7', 'fd', '93', '26', '36', '3f', 'f7', 'cc', '34', 'a5', 'e5', 'f1', '71', 'd8', '31', '15'], 
@@ -181,6 +183,29 @@ class Block :
                 binmodres = bin(modres)[2:] # Get the binary equivalent
 
         return modres
+    
+    @staticmethod
+    def XorBlocks(first : Block, second : Block) :
+        """
+        Compute the result of one to one xor of the values between two blocks  
+        'first' - First block used for the operation
+        'second' - Second block used for the operation
+        return : Block that is a result of the operation
+        """
+        
+        # Copy the first block in the result
+        result : Block = first
+
+        # Element wise xor between both blocks
+        for i in range(0, 4) :
+
+            for j in range(0, 4) :
+
+                result.block[i][j] = result.block[i][j] ^ second.block[i][j]
+
+        # Return the xor operation result
+        return result
+
 
     # Instance methods =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
    
@@ -311,5 +336,4 @@ class Block :
             blockWithKey.append(blockWithKeyRow)
 
         self.block = blockWithKey
-
-                
+    
