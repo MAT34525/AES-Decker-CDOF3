@@ -194,14 +194,14 @@ class Block :
         """
         
         # Copy the first block in the result
-        result : Block = first
+        result : Block = Block(bytearray(16))
 
         # Element wise xor between both blocks
         for i in range(0, 4) :
 
             for j in range(0, 4) :
 
-                result.block[i][j] = result.block[i][j] ^ second.block[i][j]
+                result.block[i][j] = first.block[i][j] ^ second.block[i][j]
 
         # Return the xor operation result
         return result

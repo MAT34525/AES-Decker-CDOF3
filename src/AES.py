@@ -377,7 +377,6 @@ class AES :
                 previousBlock : Block = Block(self.iv) if blockIndex == 0 else self.blocks[blockIndex-1] 
 
                 # Decrypt a block using ECB technique
-                plainBlocks.append(self.UnCipherBlock(Block.XorBlocks(self.blocks[blockIndex], previousBlock), keySchedule)) 
-
+                plainBlocks.append(Block.XorBlocks(self.UnCipherBlock(self.blocks[blockIndex], keySchedule), previousBlock))
 
         self.blocks = plainBlocks

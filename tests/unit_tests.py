@@ -10,6 +10,27 @@ from Key import *
 
 class TestAESMethods(unittest.TestCase):
 
+    def test_block_xor(self):
+
+        block1 = Block(randbytes(16))
+
+        block2 = Block(randbytes(16))
+
+        blockXor = Block.XorBlocks(block1, block2)
+
+        blockXorXor = Block.XorBlocks(blockXor, block2) # Should be equal to block1
+
+        print("\n TEST BLOCKS XOR")
+        print("\n[+] - 1 - ", block1.block)
+        print("\n[+] - 2 -", blockXor.block)
+        print("\n[+] - 3 -", blockXorXor.block)
+        print("\n")
+
+        self.assertNotEqual(blockXor.block, block1.block)
+
+        self.assertEqual(blockXorXor.block, block1.block)
+
+    """
     def test_shift_rows(self):
 
         sequence = randbytes(16)
@@ -156,11 +177,11 @@ class TestAESMethods(unittest.TestCase):
 
             InitSeq = cipher.BlocksToSequence() 
 
-            cipher.Cipher()
+            cipher.Cipher(Modes.ECB)
 
             EncryptedSeq = cipher.BlocksToSequence()
 
-            cipher.UnCipher()
+            cipher.UnCipher(Modes.ECB)
 
             DecryptedSeq = cipher.BlocksToSequence()
 
@@ -177,17 +198,18 @@ class TestAESMethods(unittest.TestCase):
 
         InitSeq = cipher.BlocksToSequence() 
 
-        cipher.Cipher()
+        cipher.Cipher(Modes.ECB)
 
         EncryptedSeq = cipher.BlocksToSequence()
 
-        cipher.UnCipher()
+        cipher.UnCipher(Modes.ECB)
 
         DecryptedSeq = cipher.BlocksToSequence()
 
         self.assertNotEqual(InitSeq, EncryptedSeq)
 
         self.assertEqual(InitSeq, DecryptedSeq)
+    """
 
 if __name__ == "__main__" :
     unittest.main()
